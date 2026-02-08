@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Graph Neural Model Predictive Control integrates GNN-based dynamics models with structure-exploiting MPC to enable real-time control of high-dimensional systems.">
+  <meta name="keywords" content="GNN-MPC, Graph Neural Network, Model Predictive Control, MPC, Soft Robotics, High-Dimensional Control, Condensing, Real-Time Control, Trajectory Tracking, Obstacle Avoidance">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graph Neural Model Predictive Control for High-Dimensional Systems</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Graph Neural Model Predictive Control for High-Dimensional Systems</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Patrick Benito Eberhard<sup>1</sup>,</span>
+            <span class="author-block">Luis Pabon<sup>2</sup>,</span>
+            <span class="author-block">Daniele Gammelli<sup>2</sup>,</span>
+            <span class="author-block">Hugo Buurmeijer<sup>2</sup>,</span>
+            <br>
+            <span class="author-block">Mark Leone<sup>2</sup>,</span>
+            <span class="author-block">Amon Lahr<sup>1</sup>,</span>
+            <span class="author-block">Andrea Carron<sup>1</sup>,</span>
+            <span class="author-block">Marco Pavone<sup>2,3</sup></span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>1</sup>ETH Z&uuml;rich,</span>
+            <span class="author-block"><sup>2</sup>Stanford University,</span>
+            <span class="author-block"><sup>3</sup>NVIDIA Research</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="publication-video" style="box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);">
+            <video poster="" id="teaser" autoplay controls muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+              <source src="./static/videos/icra-2026-video-web.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              The control of high-dimensional systems, such as soft robots, requires models that faithfully
+              capture complex dynamics while remaining computationally tractable. This work presents a framework
+              that integrates Graph Neural Network (GNN)-based dynamics models with structure-exploiting Model
+              Predictive Control to enable real-time control of high-dimensional systems.
+            </p>
+            <p>
+              By representing the system as a graph with localized interactions, the GNN preserves sparsity,
+              while a tailored condensing algorithm eliminates state variables from the control problem,
+              ensuring efficient computation. The complexity of our condensing algorithm scales linearly
+              with the number of system nodes, and leverages GPU parallelization to achieve real-time performance.
+            </p>
+            <p>
+              The proposed approach is validated in simulation and experimentally on a physical soft robotic trunk.
+              Results show that our method scales to systems with up to 1,000 nodes at 100&nbsp;Hz in closed-loop,
+              and demonstrates real-time reference tracking on hardware with sub-centimeter accuracy,
+              outperforming baselines by 63.6%. Finally, we show the capability of our framework to achieve
+              effective full-body obstacle avoidance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Experimental Setup</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            The GNN is trained in PyTorch Geometric and translated to Flax for JIT compilation.
+            The condensing algorithm is implemented in JAX, leveraging vectorized mapping and GPU execution via XLA.
+            The resulting QP is solved using the interior-point solver HPIPM within a Sequential Quadratic Programming (SQP) real-time iteration scheme.
+          </p>
+          <p>
+            The simulation models a tendon-driven trunk robot in MuJoCo.
+            Hardware experiments use the corresponding physical platform, tracked via an OptiTrack motion capture system at 100&nbsp;Hz and actuated by 6 XM540 Dynamixel motors.
+          </p>
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-centered">
+              <img src="./static/images/trunk-sim.png" alt="Simulated trunk robot" style="max-height: 300px;"/>
+              <p>Simulated trunk robot</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content has-text-centered">
+              <img src="./static/images/trunk-real.png" alt="Physical trunk robot" style="max-height: 300px;"/>
+              <p>Physical trunk robot</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Scalability</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              We evaluate scalability by varying the number of segments in the simulated trunk from 1 to 1,000.
+              The MPC problem is solved over a horizon of N=20 with constraints on the end effector and control inputs.
+              GNN-MPC exhibits sub-linear scaling with respect to the number of segments, enabling real-time control at 100&nbsp;Hz.
+              The condensing step captures most of the computational burden and is effectively parallelized on the GPU.
+            </p>
+          </div>
+
+          <div class="content has-text-centered">
+            <img src="./static/images/scalability.png" alt="Scalability of GNN-MPC" style="max-width: 550px; width: 100%;"/>
+            <p>Scalability of GNN-MPC with respect to the number of subsystems. Computation times are shown in log-log scale.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Hardware Tracking Results</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            We validate GNN-MPC on a physical soft trunk robot for trajectory tracking of a figure-eight and a circle.
+            The MPC runs at 100&nbsp;Hz with a prediction horizon of N=20. The robot is represented by 4 nodes measured via motion capture, each with 6 states (position and velocity in 3D).
+          </p>
+          <p>
+            GNN-MPC achieves average tracking errors of 6.25&nbsp;mm (figure-eight) and 3.67&nbsp;mm (circle), outperforming all baselines by at least 63.6%.
+            The GNN captures hardware-specific effects such as input nonlinearities and tendon slackness, which the baselines fail to model effectively.
+          </p>
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-centered">
+              <img src="./static/images/koopman-circle.png" alt="Koopman circle tracking" style="max-width: 100%;"/>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content has-text-centered">
+              <img src="./static/images/ssm-circle.png" alt="SSM circle tracking" style="max-width: 100%;"/>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content has-text-centered">
+              <img src="./static/images/gnn-circle.png" alt="GNN circle tracking" style="max-width: 100%;"/>
+            </div>
+          </div>
+        </div>
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content has-text-centered">
+              <img src="./static/images/koopman-eight.png" alt="Koopman figure-eight tracking" style="max-width: 100%;"/>
+              <p>(a) Koopman</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content has-text-centered">
+              <img src="./static/images/ssm-eight.png" alt="SSM figure-eight tracking" style="max-width: 100%;"/>
+              <p>(b) SSM-Orth</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content has-text-centered">
+              <img src="./static/images/gnn-eight.png" alt="GNN figure-eight tracking" style="max-width: 100%;"/>
+              <p>(c) GNN (Ours)</p>
+            </div>
+          </div>
+        </div>
+        <div class="content has-text-centered">
+          <p>Reference tracking of a circle (top) and figure-eight (bottom). The reference is shown in dashed black, closed-loop trajectories in red, and MPC plans at each time step in grey.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Obstacle Avoidance</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              We demonstrate the benefit of full-node control by enabling collision avoidance across the entire
+              soft robot through individual barrier terms for each of the four measured nodes.
+              GNN-MPC successfully avoids collisions while keeping other nodes close to their resting position,
+              demonstrating the capability to handle complex interactions with the environment.
+            </p>
+          </div>
+
+          <div class="columns is-centered">
+            <div class="column">
+              <div class="content has-text-centered">
+                <img src="./static/images/obstacle-avoidance-upper.png" alt="Obstacle avoidance at middle node" style="max-width: 100%;"/>
+                <p>Deflection as the obstacle approaches the middle node.</p>
+              </div>
+            </div>
+            <div class="column">
+              <div class="content has-text-centered">
+                <img src="./static/images/obstacle-avoidance-lower.png" alt="Obstacle avoidance at end effector" style="max-width: 100%;"/>
+                <p>Deflection as the obstacle approaches the end effector.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{benito2025gnnmpc,
+  author    = {Benito Eberhard, Patrick and Pabon, Luis and Gammelli, Daniele and Buurmeijer, Hugo and Leone, Mark and Lahr, Amon and Carron, Andrea and Pavone, Marco},
+  title     = {Graph Neural Model Predictive Control for High-Dimensional Systems},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2026}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <p>
+            Website template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
